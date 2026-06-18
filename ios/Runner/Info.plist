@@ -66,5 +66,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Esta aplicación necesita acceder a tu ubicación para calcular la ruta de manera eficiente.</string>
+	
 </dict>
 </plist>
