@@ -28,7 +28,7 @@ jobs:
           cd ios && pod repo update && cd ..
 
       - name: Build IOS App
-        run: flutter build ios --release --no-codesign
+        run: flutter build ipa --release --no-codesign
 
       - name: Create Unsigned IPA Folder
         run: |
