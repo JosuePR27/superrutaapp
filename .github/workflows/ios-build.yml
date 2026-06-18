@@ -1,4 +1,4 @@
-name: Build Unsigned IPA
+   name: Build Unsigned IPA
 
 on:
   workflow_dispatch:
@@ -30,14 +30,16 @@ jobs:
       - name: Build IOS App
         run: flutter build ipa --release --no-codesign
 
-      - name: Create Unsigned IPA Folder
+      - name: Crear estructura IPA final
         run: |
-          mkdir -p build/ios/ipa
-          mv build/ios/iphoneos/Runner.app build/ios/ipa/Payload
-          cd build/ios/ipa && zip -r app-release.ipa Payload/ && cd ../../..
+          mkdir -p build/ios/iphoneos/Payload
+          # Este comando busca de forma inteligente cualquier carpeta .app dentro de build/ios/ y la mueve a Payload
+          find build/ios/ -name "*.app" -type d -exec mv {} build/ios/iphoneos/Payload/ \;
+          cd build/ios/iphoneos
+          zip -r mi_aplicacion.ipa Payload
 
-      - name: Upload IPA Artifact
+      - name: Subir el archivo IPA como artefacto
         uses: actions/upload-artifact@v4
         with:
           name: app-release-ipa
-          path: build/ios/ipa/*.ipa
+          path: build/ios/iphoneos/mi_aplicacion.ipa
