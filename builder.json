@@ -1,0 +1,17 @@
+{
+  "project": "t2dolist",
+  "platform": "ios",
+  "github": {
+    "owner": "JosuePR27",
+    "repo": "superrutaapp"
+  },
+  "ios": {
+    "path": "ios"
+  },
+  "flutter": {
+    "version": "3.44.1",
+    "watch": {}
+  },
+  "reactNative": {},
+  "mobai": {}
+}
