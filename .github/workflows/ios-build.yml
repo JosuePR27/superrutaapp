@@ -1,0 +1,43 @@
+name: Build Unsigned IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+          cd ios && pod repo update && cd ..
+
+      - name: Build IOS App
+        run: flutter build ipa --release --no-codesign
+
+      - name: Create Unsigned IPA Folder
+        run: |
+          mkdir -p build/ios/ipa
+          mv build/ios/iphoneos/Runner.app build/ios/ipa/Payload
+          cd build/ios/ipa && zip -r app-release.ipa Payload/ && cd ../../..
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-ipa
+          path: build/ios/ipa/*.ipa
