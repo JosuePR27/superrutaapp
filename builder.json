@@ -5,7 +5,9 @@
     "owner": "JosuePR27",
     "repo": "superrutaapp"
   },
-  "ios": {},
+  "ios": {
+    "path": "ios"
+  },
   "flutter": {
     "version": "3.44.1",
     "watch": {}
